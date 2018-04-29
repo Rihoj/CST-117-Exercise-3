@@ -25,7 +25,17 @@ namespace CST_117_Exercise_3
 
         private void convertButton_Click(object sender, EventArgs e)
         {
-            Double earthWeight = double.Parse(this.earthWeightTextBox.Text);
+            Double earthWeight = 0;
+            try
+            {
+                earthWeight = (double) this.earthWeightTextBox.Value;
+            }
+            catch
+            {
+                MessageBox.Show("Text Input is not of the correct numerical format.", "Format Error");
+                this.earthWeightTextBox.Value = 0;
+                return;
+            }
             Double marsWeight = convertWeight(earthWeight);
             changeMarsWeightLabel(marsWeight);
         }
@@ -38,13 +48,22 @@ namespace CST_117_Exercise_3
         }
         private void changeMarsWeightLabel(double marsWeight)
         {
-            String newText = MARS_WEIGHT_TEXT + marsWeight.ToString();
+            //String.Format("{0:#,0.000}", value)
+            String newText = MARS_WEIGHT_TEXT + String.Format("{0:#,0.000}", Math.Round(marsWeight, 3));
             marsWeightLabel.Text = newText;
         }
 
         private void marsConversionForm_Load(object sender, EventArgs e)
         {
             marsWeightLabel.Text = MARS_WEIGHT_TEXT;
+        }
+
+        private void earthWeightTextBox_ValueChanged(object sender, EventArgs e)
+        {
+            if(Decimal.Round(this.earthWeightTextBox.Value, 3) != this.earthWeightTextBox.Value)
+            {
+                this.earthWeightTextBox.Value = Decimal.Round(this.earthWeightTextBox.Value, 3);
+            }
         }
     }
 }
