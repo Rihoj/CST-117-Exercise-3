@@ -16,7 +16,7 @@ namespace CST_117_Exercise_3
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new marsConversionForm());
         }
     }
 }
